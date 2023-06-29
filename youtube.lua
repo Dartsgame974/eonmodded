@@ -1,6 +1,13 @@
 -- Fonction pour récupérer les données d'une chaîne
 function getChannelData(channelIdentifier)
-    local url = "https://pipedapi.kavin.rocks/channel/" .. channelIdentifier
+    local url
+    -- Vérifier si l'identifiant de la chaîne est un ID ou un nom
+    if tonumber(channelIdentifier) then
+        url = "https://pipedapi.kavin.rocks/channel/" .. channelIdentifier
+    else
+        url = "https://pipedapi.kavin.rocks/channelByName/" .. channelIdentifier
+    end
+
     local response = http.get(url)
     local data = response.readAll()
     response.close()
