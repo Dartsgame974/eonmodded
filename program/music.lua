@@ -1,3 +1,4 @@
+local json = require("json")
 local aukit = require("aukit")
 local austream = shell.resolveProgram("austream")
 
@@ -9,8 +10,8 @@ if response then
   response.close()
 
   -- Parsing du fichier JSON de la liste de lecture
-  local playlist = textutils.unserializeJSON(playlistData)
-  if playlist then
+  local success, playlist = pcall(json.decode, playlistData)
+  if success then
     -- Lecture des musiques dans la liste de lecture
     for _, entry in ipairs(playlist) do
       -- Récupération du titre et du lien de la musique
