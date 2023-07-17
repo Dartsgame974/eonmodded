@@ -24,7 +24,11 @@ if response then
       print("Lecture de la musique : " .. title)
       
       -- Attente jusqu'à la fin de la musique
-      while process.isRunning() do
+      while true do
+        local status, result = pcall(aukit.isPlaying)
+        if not status or not result then
+          break
+        end
         sleep(1)
       end
     end
