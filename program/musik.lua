@@ -24,7 +24,7 @@ if response then
       print("Lecture de la musique : " .. title)
       
       -- Attente jusqu'à la fin de la musique
-      while aukit.isPlaying() do
+      while aukit.isRunning() do
         sleep(1)
       end
     end
