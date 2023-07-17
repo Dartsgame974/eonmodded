@@ -18,8 +18,7 @@ if response then
       local musicURL = entry.link
 
       -- Lecture de la musique en utilisant AUStream
-      shell.openTab(austream, musicURL)
-      local process = shell.openTab(austream, musicURL)
+      shell.run(austream, musicURL)
       
       -- Affichage du titre de la musique en cours de lecture
       print("Lecture de la musique : " .. title)
