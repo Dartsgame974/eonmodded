@@ -10,7 +10,7 @@ if response then
   response.close()
 
   -- Parsing du fichier JSON de la liste de lecture
-  local success, playlist = pcall(json.decode, playlistData)
+  local success, playlist = pcall(json.parse, playlistData)
   if success then
     -- Lecture des musiques dans la liste de lecture
     for _, entry in ipairs(playlist) do
