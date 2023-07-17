@@ -11,24 +11,11 @@ if response then
   -- Parsing du fichier JSON de la liste de lecture
   local success, playlist = pcall(textutils.unserializeJSON, playlistData)
   if success and type(playlist) == "table" then
-    -- Liste des titres de musique
-    local musicTitles = {}
-
-    -- Lecture des musiques dans la liste de lecture
-    for _, entry in ipairs(playlist) do
-      -- Récupération du titre et du lien de la musique
-      local title = entry.title
-      local musicURL = entry.link
-
-      -- Ajout du titre à la liste
-      table.insert(musicTitles, title)
-      
+    -- Fonction pour lire une musique
+    local function playMusic(title, musicURL)
       -- Lecture de la musique en utilisant AUStream
       shell.run(austream, musicURL)
-    end
-
-    -- Lecture des musiques individuellement
-    for i, title in ipairs(musicTitles) do
+      
       -- Affichage du titre de la musique en cours de lecture
       print("Lecture de la musique : " .. title)
       
@@ -40,6 +27,16 @@ if response then
         end
         sleep(1)
       end
+    end
+
+    -- Lecture des musiques dans la liste de lecture
+    for _, entry in ipairs(playlist) do
+      -- Récupération du titre et du lien de la musique
+      local title = entry.title
+      local musicURL = entry.link
+
+      -- Lecture de la musique
+      playMusic(title, musicURL)
     end
   else
     print("Erreur de parsing du fichier de la liste de lecture.")
